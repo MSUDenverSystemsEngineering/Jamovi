@@ -141,8 +141,8 @@ Try {
 		}
 
 		## <Perform Installation tasks here>
-		Execute-Process -Path "$dirFiles\jamovi-1.6.23.0-win64.exe " -Parameters '/S' -WindowStyle 'Hidden'
-
+		$exitCode = Execute-Process -Path "$dirFiles\jamovi-1.6.23.0-win64.exe " -Parameters '/S' -WindowStyle 'Hidden'
+		If (($exitCode.ExitCode -ne "0") -and ($mainExitCode -ne "3010")) { $mainExitCode = $exitCode.ExitCode }
 		##*===============================================
 		##* POST-INSTALLATION
 		##*===============================================
@@ -181,8 +181,8 @@ Try {
 		}
 
 		# <Perform Uninstallation tasks here>
-		Execute-Process -Path "$envProgramFiles\jamovi 1.6.23.0\uninstall" -Parameters '/S' -WindowStyle 'Hidden'
-
+		$exitCode = Execute-Process -Path "$envProgramFiles\jamovi 1.6.23.0\uninstall" -Parameters '/S' -WindowStyle 'Hidden'
+		If (($exitCode.ExitCode -ne "0") -and ($mainExitCode -ne "3010")) { $mainExitCode = $exitCode.ExitCode }
 		##*===============================================
 		##* POST-UNINSTALLATION
 		##*===============================================
